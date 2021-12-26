@@ -314,23 +314,45 @@ function onYouTubeIframeAPIReady() {
 	});
 }
 
+var co = 0
 // 4. The API will call this function when the video player is ready.
 function onPlayerReady(event) {
 }
-
 // 5. The API calls this function when the player's state changes.
 //    The function indicates that when playing a video (state=1),
 //    the player should play for six seconds and then stop.
 var done = false;
 function onPlayerStateChange(event) {
 	if (event.data == YT.PlayerState.PLAYING && !done) {
-		setTimeout(stopVideo, 1000000000);
-		done = true;
+        setTimeout(function() {
+            // after 1000ms, call the `setTimeout` callback
+            // In the meantime, continue executing code below
+            setTimeout(function() {
+              setTime() //runs second after 1100ms
+            },2000)
+          
+            stopVideo() //runs first, after 1000ms
+          },50000)
+          
+          done = true
 	}
 }
-function stopVideo() {
-	player.stopVideo();
+
+function setTime() {
+    player2.seekTo(player.getCurrentTime() + list_json['delay']['oFZYZYGZhXc'],true);
+    document.getElementsByClassName("2 text location")[0].innerText = player2.getVideoData().title;
 }
+function stopVideo() {
+	player2.loadVideoById(list_json['list'][1]);
+    
+}
+
+var  list_json = { "delay": { "Z5D0BReJ1aY": 0, "KIrE9uwZKUI": -1.02, "LyDslAIApMI": 1.8, "MgxW9lvdUlQ": 68.2, "AIOuLlqgzAY": 68.2, "R3ev2sXPqfk": 219.1, "IRsdG2_zNGI": 0, "L84KiMciiHg": 0.1, "GEQjyqYVcz8": 54.4, "8mfDHiOW5yg": 68.6, "95uFu_94BQ0": 0.1, "oFZYZYGZhXc": 2, "aIqYWvA4AMI": -0.2 }, "list": [ "aIqYWvA4AMI", "oFZYZYGZhXc", "95uFu_94BQ0", "8mfDHiOW5yg", "Z5D0BReJ1aY", "KIrE9uwZKUI", "LyDslAIApMI", "MgxW9lvdUlQ", "AIOuLlqgzAY", "R3ev2sXPqfk", "R3ev2sXPqfk", "IRsdG2_zNGI", "L84KiMciiHg", "GEQjyqYVcz8" ] }
+
+
+var time = player3.getCurrentTime()-0.2
+player.seekTo(time);
+
 
 player.playVideo()
 player2.playVideo()
@@ -339,8 +361,3 @@ player3.playVideo()
 player.unMute()
 player2.mute()
 player3.mute()
-
-
-var time = player3.getCurrentTime()-0.2
-player.seekTo(time);
-
