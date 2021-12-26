@@ -1,7 +1,9 @@
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat&amp;display=swap" rel="stylesheet">
-<html lang="ko-KR"><head></head>
+<html lang="ko-KR">
+
+<head></head>
 <div class="app">
 
 	<div class="cardList">
@@ -100,24 +102,14 @@
 <script>
 	var ms = 0
 	window.onload = function () { // window.addEventListener('load', (event) => {와 동일합니다.
-		if (ms > 0) {
-			document.getElementsByClassName("app").onclick = function () {
-				player.playVideo()
-				player2.playVideo()
-				player3.playVideo()
 
-				player.unMute()
-				player2.mute()
-				player3.mute()
+		document.getElementsByClassName("1 text location")[0].innerText = player.getVideoData().title;
+		document.getElementsByClassName("1 text description")[0].innerText = player.getVideoData().author;
+		document.getElementsByClassName("2 text location")[0].innerText = player2.getVideoData().title;
+		document.getElementsByClassName("2 text description")[0].innerText = player2.getVideoData().author;
 
-
-				var time = player3.getCurrentTime() - 0.2
-				player.seekTo(time);
-				ms = 1
-
-			}
-
-		};
+		document.getElementsByClassName("0 text location")[0].innerText = player3.getVideoData().title;
+		document.getElementsByClassName("0 text description")[0].innerText = player3.getVideoData().author;
 
 	};
 </script>
